@@ -138,19 +138,54 @@ const drawCardForComputer = (count) => {
 }
 
 const calculateComputerScore = (cardsArr) => {
-        for (let i = 0; i < cardsArr.length; i++) {
-            if (cardsArr[i].value === "KING" ||
-                cardsArr[i].value === "QUEEN" ||
-                cardsArr[i].value === "JACK") {
-                cardsArr[i].value = 10
-            } else if (cardsArr[i].value === "ACE") {
-                cardsArr[i].value = 1
-            } else {
-                cardsArr[i].value = parseInt(cardsArr[i].value)
-            }
-
-            compScore += cardsArr[i].value
+    for (let i = 0; i < cardsArr.length; i++) {
+        if (cardsArr[i].value === "KING" ||
+            cardsArr[i].value === "QUEEN" ||
+            cardsArr[i].value === "JACK") {
+            cardsArr[i].value = 10
+        } else if (cardsArr[i].value === "ACE") {
+            cardsArr[i].value = 1
+        } else {
+            cardsArr[i].value = parseInt(cardsArr[i].value)
         }
 
-        let compScoreTracker = document.querySelector("#compScoreTracker")
-        compScoreTracker.innerText = `Comp Score: ${compScore}`
+        compScore += cardsArr[i].value
+    }
+
+    let compScoreTracker = document.querySelector("#compScoreTracker")
+    compScoreTracker.innerText = `Comp Score: ${compScore}`
+}
+
+const displayCompCard = (cardsArr) => {
+    let compCardContainer = document.querySelector("#compCardContainer")
+    for (let i = 0; i < cardsArr.length; i++) {
+        let cardImg = document.createElement("img")
+        cardImg.src = cardsArr[i].image
+        compCardContainer.append(cardImg);
+    }
+}
+
+const winner = (playerScore, compScore) => {
+    let result = 0;
+    if (playerScore === compScore) {
+        result = "Tie"
+    } else if (playerScore > 21) {
+        result = "Busted!!"
+    } else if (playerScore < 21 && compScore > 21) {
+        result = `Player Lost!! Try again.`
+    } else {
+        result = `Computer Wins!!`
+    }
+    return result;
+}
+
+const loadStayCard = () => {
+    let result = 0;
+    drawCardForComputer(3);
+    result += compScore
+    document.querySelector("h1").innerText = winner(playerScore, compScore);
+
+    let compScoreTracker = document.querySelector("#compScoreTracker")
+    compScoreTracker.innerText = `Comp Score: ${compScore}`
+
+}
