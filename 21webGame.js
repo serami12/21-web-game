@@ -9,17 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     hitStayContainer.addEventListener("click", (event) => {
         if (event.target.innerText === "Hit") {
             loadHitCard();
-        } else {
-            loadStayCard();
-
+        } else if (event.target.innerText === "Stay") {
+            loadStayCard()
         }
     })
 
 })
 
 let mainDeckId = null;
-let playerHandArr = [];
-let computerHand = [];
 let playerScore = 0;
 let compScore = 0;
 
@@ -36,6 +33,7 @@ const configureStartButtonListener = () => {
 const hideMainDiv = () => {
     document.querySelector("#mainDiv").style.display = "none"
 }
+
 const displayMainDiv = () => {
     document.querySelector("#mainDiv").style.display = ""
 }
@@ -51,9 +49,7 @@ const loadCardDeck = () => {
         })
         .then(deckData => {
             mainDeckId = deckData.deck_id
-
             drawCardForPlayer(2);
-
         })
         .catch(error => {
             console.log(error)
@@ -65,7 +61,6 @@ let points = document.querySelector("#scoreBox")
 
 const drawCardForPlayer = (count) => {
     const urlForTwoCards = (`https://deckofcardsapi.com/api/deck/${mainDeckId}/draw/?count=${count}`);
-
     fetch(urlForTwoCards)
         .then(response => {
             return response.json()
@@ -119,7 +114,6 @@ const loadHitCard = () => {
 }
 
 
-
 const drawCardForComputer = (count) => {
     const urlForTwoCards = (`https://deckofcardsapi.com/api/deck/${mainDeckId}/draw/?count=${count}`);
     fetch(urlForTwoCards)
@@ -131,7 +125,6 @@ const drawCardForComputer = (count) => {
             displayCompCard(cardsArr);
             calculateComputerScore(cardsArr);
         })
-
         .catch(error => {
             console.log(error)
         })
@@ -177,15 +170,48 @@ const winner = (playerScore, compScore) => {
         result = `Computer Wins!!`
     }
     return result;
+
 }
+
 
 const loadStayCard = () => {
     let result = 0;
     drawCardForComputer(3);
     result += compScore
-    document.querySelector("h1").innerText = winner(playerScore, compScore);
+    // document.querySelector("h1").innerText = winner(playerScore, compScore);
 
-    let compScoreTracker = document.querySelector("#compScoreTracker")
-    compScoreTracker.innerText = `Comp Score: ${compScore}`
+    let reload = document.createElement("button")
+    reload.innerText = "Try Again!!"
+
+    let header2 = document.createElement("h2")
+    header2.innerText = winner(playerScore, compScore);
+
+    reload.addEventListener("click", () => {
+        loadReload();
+    })
+
+
+    let mainPage = document.querySelector("#mainPage")
+    mainPage.appendChild(reload);
+    mainPage.appendChild(header2);
+
+    // let compScoreTracker = document.querySelector("#compScoreTracker")
+    // compScoreTracker.innerText = `Comp Score: ${compScore}`
 
 }
+
+const loadReload = () => {
+    let result = 0;
+    if (playerScore < 21 && compScore > 21) {
+        result = `Player Lost!! Try again.`
+    }
+    let reloadButton = document.querySelector("#reloadButton")
+    window.location.reload();
+
+}
+
+// console.log("JS is running")
+// loadReload();
+
+/* Question by JR:
+where to put the event listener ? */

@@ -1,0 +1,46 @@
+body {
+    background-image: url("./21webGame.jpg");
+    background-repeat: no repeat;
+}
+
+
+/* #playerContainer {
+    display: grid;
+    justify-content: start;
+
+} */
+/* 
+#compContainer {
+    grid-template-columns: (1fr, 1fr);
+} */
+
+#cardContainer {
+    display: flex;
+    justify-content: space-evenly;
+    grid-template-columns: (1fr, 1fr);
+    flex-direction: row-reverse;
+}
+
+#scoreBox {
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    /* flex-direction: row-reverse;
+} */
+}
+
+h1 {
+    display: flex;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+}
+
+h2 {
+    display: flex;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+}

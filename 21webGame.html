@@ -4,26 +4,38 @@
 
 <head>
     <script src="./21webGame.js"></script>
-    <meta http-equiv="refresh" content="7.5" />
+    <!-- <meta http-equiv="refresh" content="15"/> -->
+    <link rel="stylesheet" href="./21webGame.css">
 </head>
 
 <body>
-    <h1>Simple 21</h1>
+    <div id="mainPage">
+        <h1>Simple 21</h1>
+    </div>
     <div id="start-game">
         <button id="startGameButton" type="button"> Start Game</button>
     </div>
+
+    <!-- <div id="pict">
+        <img id="picture" src="21-web-game/21webGame.jpg" alt="cards"></img>
+    </div> -->
+
     <div id="mainDiv">
+
         <div id="scoreBox">
             <div id="playerScoreTracker"></div>
             <div id="compScoreTracker"></div>
         </div>
+
         <div id="cardContainer">
             <div id="compCardContainer"></div>
             <div id="playerCardContainer"></div>
         </div>
+
         <div id="hitStayContainer">
             <button id="hitButton" type="button">Hit</button>
             <button id="stayButton" type="button">Stay</button>
+            <!-- <button id="reloadButton" type="submit" onClick="loadReload()">Try again</button> -->
         </div>
 
     </div>
